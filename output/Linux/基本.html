@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+        <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <title>Linux基本 - </title>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="container">
+            
+<div id="header">
+  <div id="post-nav"><a href="/">Home</a>&nbsp;»&nbsp;<a href="/#Linux">Linux</a>&nbsp;»&nbsp;Linux基本</div>
+</div>
+<div class="clearfix"></div>
+<div id="title">Linux基本</div>
+  <div id="content">
+  <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#_1">基本命令</a><ul>
+<li><a href="#_2"></a></li>
+</ul>
+</li>
+<li><a href="#_3">档案权限</a><ul>
+<li><a href="#_4">文件属性</a></li>
+<li><a href="#_5">改变权限和属性</a><ul>
+<li><a href="#chgrp">chgrp 改变所属群组</a></li>
+<li><a href="#chown">chown 改变档案拥有者</a></li>
+<li><a href="#chmod">chmod 改变档案的权限</a></li>
+<li><a href="#_6">文件的读写执行</a></li>
+<li><a href="#_7">目录的读写执行</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_8">档案和目录</a><ul>
+<li><a href="#_9">目录基本操作</a></li>
+<li><a href="#_10">目录基本命令</a></li>
+<li><a href="#path">$PATH</a></li>
+<li><a href="#_11">档案和目录的管理</a></li>
+</ul>
+</li>
+<li><a href="#_12">端口</a><ul>
+<li><a href="#_13">查看端口</a></li>
+<li><a href="#kill">kill程序</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="_1">基本命令</h1>
+<h2 id="_2"></h2>
+<ul>
+<li>
+<p>pwd 查看当前目录</p>
+</li>
+<li>
+<p>date 当前时间</p>
+</li>
+<li>
+<p>cal 日历</p>
+</li>
+<li>
+<p>ls 查看当前文件夹下所有文件（-l 详细信息，-al 包括隐藏文件的详细信息）</p>
+</li>
+</ul>
+<h1 id="_3">档案权限</h1>
+<h2 id="_4">文件属性</h2>
+<div class="hlcode"><pre><span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">-</span><span class="n">wr</span><span class="o">--</span> <span class="n">user</span> <span class="n">group</span> <span class="mi">4223</span> <span class="n">Sep</span> <span class="mi">4</span> <span class="mi">12</span><span class="o">:</span><span class="mi">23</span> <span class="n">install</span><span class="p">.</span><span class="n">log</span>
+</pre></div>
+
+
+<ul>
+<li>1位：文件类型， -：文档，d:目录</li>
+<li>234位：拥有者权限，账号信息记录在/etc/passwd,密码记录在/etc/shadow</li>
+<li>567位：群组权限，群组信息记录在 /etc/group</li>
+<li>890位：其他人权限</li>
+<li>user：拥有者</li>
+<li>group：群组</li>
+<li>4223：文件大小</li>
+<li>时间：最后一次修改时间</li>
+<li>install.log: 文件名称</li>
+</ul>
+<h2 id="_5">改变权限和属性</h2>
+<h3 id="chgrp">chgrp 改变所属群组</h3>
+<div class="hlcode"><pre>  <span class="n">chgrp</span> <span class="p">[</span><span class="o">-</span><span class="n">R</span><span class="p">]</span> <span class="n">group</span> <span class="n">filename</span><span class="o">/</span><span class="n">dirname</span>
+</pre></div>
+
+
+<ul>
+<li>-R:递归变更，目录下所有档案及目录所属群组均改为group；group必须存在/etc/group</li>
+</ul>
+<h3 id="chown">chown 改变档案拥有者</h3>
+<div class="hlcode"><pre>  <span class="n">chown</span> <span class="p">[</span><span class="o">-</span><span class="n">R</span><span class="p">]</span> <span class="n">user</span> <span class="n">filename</span><span class="o">/</span><span class="n">dirname</span>
+</pre></div>
+
+
+<ul>
+<li>-R:递归变更，目录下所有档案及目录拥有者均改为user；user必须存在/etc/passwd</li>
+</ul>
+<h3 id="chmod">chmod 改变档案的权限</h3>
+<div class="hlcode"><pre>  <span class="n">chmod</span> <span class="p">[</span><span class="o">-</span><span class="n">R</span><span class="p">]</span> <span class="mi">777</span> <span class="n">filename</span><span class="o">/</span><span class="n">dirname</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>-R:递归变更，目录下所有档案及目录的权限</p>
+</li>
+<li>
+<p>777：r=4,w=2,x=1</p>
+</li>
+</ul>
+<h3 id="_6">文件的读写执行</h3>
+<ul>
+<li>r:读取文件的内容</li>
+<li>w:编辑、新增、修改文件的内容（不可以删除）</li>
+<li>x:可执行的文件的执行权限</li>
+</ul>
+<h3 id="_7">目录的读写执行</h3>
+<ul>
+<li>r:读取目录下的文件或者目录名称</li>
+<li>w:新建目录或者文档、修改目录或者文档名称、删除目录或者文档、移动目录或者文档</li>
+<li>x:是否可以进入该目录</li>
+</ul>
+<h1 id="_8">档案和目录</h1>
+<h2 id="_9">目录基本操作</h2>
+<ul>
+<li>. ：当前目录</li>
+<li>..：上一层目录</li>
+<li>-：前一个工作目录</li>
+<li>~：当前用户的家目录</li>
+</ul>
+<h2 id="_10">目录基本命令</h2>
+<ul>
+<li>cd:进入一个目录</li>
+<li>
+<p>pwd:显示当前目录</p>
+<p>-P:显示实际的工作目录，而非链接档</p>
+</li>
+<li>
+<p>mkdir：创建一个目录</p>
+<p>-p:递归建立目录<br />
+-m:配置目录的权限</p>
+</li>
+<li>
+<p>rmdir：删除一个空目录</p>
+<p>-p:递归删除空目录</p>
+</li>
+</ul>
+<h2 id="path">$PATH</h2>
+<p>当我们在执行一个命令时，例如ls，系统会在PATH的路径下搜索第一个ls的可执行文件，先搜索到的先被执行</p>
+<div class="hlcode"><pre><span class="err">增加路径的</span> <span class="n">PATH</span><span class="o">=</span><span class="s">&quot;$PATH&quot;</span><span class="o">:/</span><span class="n">root</span><span class="err">。。。</span>
+</pre></div>
+
+
+<h2 id="_11">档案和目录的管理</h2>
+<h1 id="_12">端口</h1>
+<h2 id="_13">查看端口</h2>
+<div class="hlcode"><pre> <span class="n">lsof</span> <span class="o">-</span><span class="n">i</span> <span class="n">tcp</span><span class="o">:</span><span class="n">port</span>
+</pre></div>
+
+
+<h2 id="kill">kill程序</h2>
+<div class="hlcode"><pre> <span class="n">sudo</span> <span class="n">kill</span> <span class="n">PID</span>  <span class="c1">//PID是查看端口号获得的程序的PID</span>
+</pre></div>
+</div>
+
+        </div>
+        <div id="footer">
+            <span>
+                Copyright © 2019 alisa.zhao.
+                Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.
+            </span>
+        </div>
+        
+    </body>
+</html>
